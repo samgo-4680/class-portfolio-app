@@ -5,6 +5,7 @@ import { db } from '../../../../lib/supabase';
 import { formatKoreanDate } from '../../../../lib/utils';
 import NewQuestionForm from '../../../../components/NewQuestionForm';
 import LogoutButton from '../../../../components/LogoutButton';
+import DeleteClassButton from '../../../../components/DeleteClassButton';
 
 export const dynamic = 'force-dynamic';
 
@@ -92,6 +93,16 @@ export default async function ClassDetail({ params }) {
             }))}
           </tbody>
         </table>
+      </div>
+
+      <div className="section-title"><h2>데이터 관리</h2></div>
+      <div className="card">
+        <h3>학기 종료 후 정리</h3>
+        <p className="muted">수업을 삭제하기 전에 Excel 파일을 내려받아 보관하세요. 수업을 삭제하면 이 수업의 학생, 질문, 답변이 모두 영구 삭제됩니다.</p>
+        <div className="actions data-actions">
+          <a className="btn secondary" href={`/api/teacher/classes/${classId}/export`}>Excel 백업</a>
+          <DeleteClassButton classId={classId} className={klass.name} />
+        </div>
       </div>
     </main>
   );
